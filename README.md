@@ -1,8 +1,26 @@
 # Glyph teleVox
 
-teleVox is a battery-powered, Glyph-based walkie-talkie carrier board. It brings the controller module, 2.4 GHz radio, microphone, audio output module, OLED, microSD module, battery holder, and controls together on one PCB.
+This repository walks through building a wireless hardware product from scratch, using teleVox as the example. teleVox is a Glyph-based walkie-talkie carrier board that brings a controller, 2.4 GHz radio, microphone, audio output, OLED, microSD storage, battery holder, and controls together on one PCB.
 
-The sections below explain the schematic by following its components and named nets. The tables use the references and pin names shown in KiCad so each connection is easy to trace.
+## Build journey
+
+Follow the stages from the first idea to a working device. Each linked stage opens the matching Instagram video.
+
+1. **Purpose** — decide what the device should do and why it needs to exist.
+2. **Brainstorming → Feature selection** — turn the idea into a focused set of features.
+3. **[Features → Component selection](https://www.instagram.com/p/DaWQPvEzTmU/)** — Step 1: finalize the components.
+4. **[Components → Schematic design](https://www.instagram.com/p/DaY9_ELTk44/)** — Step 2: draw the schematic.
+5. **[Schematic design → Footprints](https://www.instagram.com/p/DafersWzC4M/)** — Step 3: choose the physical footprints.
+6. **[Schematic validation](https://www.instagram.com/p/DayvqGXznD2/)** — Episode 4: run the electrical rules check (ERC).
+7. **[Footprints → PCB placement](https://www.instagram.com/p/Da1kG9mzoH7/)** — Episode 5: place the parts before routing.
+8. **[PCB design → Fabrication](https://www.instagram.com/p/Da24SWXz-QB/)** — Episode 6: order the PCB.
+9. **PCB → Mechanical case design** — fit the electronics into an enclosure.
+10. **Finished hardware + code** — assemble the device and make it work.
+11. **Final testing** — test the complete product.
+
+## How the teleVox hardware works
+
+The sections below follow the actual schematic's components and named nets. The tables use the references and pin names shown in KiCad so each connection is easy to trace.
 
 ## Design at a glance
 
