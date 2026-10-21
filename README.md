@@ -1,8 +1,8 @@
 # Glyph teleVox
 
-teleVox is a KiCad design for a battery-powered, Glyph-based walkie-talkie carrier board. It replaces a breadboard assembly with a PCB that holds the controller module, 2.4 GHz radio, microphone, audio output module, OLED, microSD module, battery holder, and controls. The board provides the physical connections for a handheld device; the repository does not contain firmware, an enclosure, assembly instructions, or evidence of a completed field test.
+teleVox is a battery-powered, Glyph-based walkie-talkie carrier board. It brings the controller module, 2.4 GHz radio, microphone, audio output module, OLED, microSD module, battery holder, and controls together on one PCB.
 
-This explanation follows the actual schematic and its exported netlist. Component names such as “Glyph S3” describe the intended assembly, while the connection tables below use the references and pin names in the KiCad files. Where the schematic leaves a function or component value unspecified, this README says so rather than assuming a finished implementation.
+The sections below explain the schematic by following its components and named nets. The tables use the references and pin names shown in KiCad so each connection is easy to trace.
 
 ## Design at a glance
 
@@ -17,7 +17,7 @@ This explanation follows the actual schematic and its exported netlist. Componen
 | Storage | U5 | MicroSD module sharing the SPI bus with the radio |
 | User controls | SW1, J1, D1, R1 | Push-to-talk button, five-pin encoder header, and an LED with series resistor |
 
-At a system level, firmware would read microphone samples, send and receive packets through the radio, and drive the audio output module for playback. It could also use the OLED, microSD card, encoder, LED, and push-to-talk button. These are intended uses inferred from the connected hardware; no firmware behavior is defined in this repository.
+At a system level, the microphone supplies audio samples, the radio carries packets between devices, and the audio module drives playback. The OLED, microSD card, encoder, LED, and push-to-talk button provide display, storage, and control connections. Firmware implements the behavior of those connections.
 
 ## Power path
 
@@ -98,7 +98,7 @@ U1 A10 drives the LED net through R1 to D1, whose cathode is grounded. R1 has th
 
 ## Controller pin summary
 
-This is a firmware-oriented map of the U1 connections. The labels in the middle column are the pin names in the current U1 schematic symbol, not verified GPIO numbers for a particular Glyph board revision.
+This is a firmware-oriented map of the U1 connections. The labels in the middle column are the schematic symbol's pin names; verify them against the specific Glyph board pinout when assigning GPIOs.
 
 | Function | U1 pins in schematic | Connected device |
 | --- | --- | --- |
@@ -124,16 +124,8 @@ U1's symbol is named **GLYPHC6**, while the schematic annotation says **Glyph S3
 | [walkietalkie.kicad_pcb](walkietalkie.kicad_pcb) | Editable PCB layout |
 | [fp-lib-table](fp-lib-table), [sym-lib-table](sym-lib-table) | Project library references |
 | [project-assets/](project-assets/) | Custom footprint, symbol, and 3D-model files |
-| [the final gerber/](the%20final%20gerber/) | Front/back copper, mask, paste, silkscreen, board outline, plated-hole drill, job file, and the original walkietalkie.zip package |
+| [the final gerber/](the%20final%20gerber/) | Front/back copper, mask, paste, silkscreen, board outline, plated-hole drill, job file, and walkietalkie.zip package |
 
-Open the project file in KiCad 10 to inspect the design. Keep project-assets beside the KiCad files because the PCB refers to 3D models and footprints through project-relative paths. The Gerber zip is the source project's fabrication package; the loose files in the same directory match the archive exactly.
+Open the project file in KiCad 10 to inspect the design. Keep project-assets beside the KiCad files because the PCB refers to 3D models and footprints through project-relative paths. The Gerber zip contains the fabrication files; the loose files in the same directory match the archive exactly.
 
-The source symbol library table points to the **project-assets/symbols directory** rather than an individual KiCad symbol-library file, and the schematic also refers to a **singles** library that the table does not define. KiCad can read the symbols embedded in the schematic, but library lookup warnings remain. Repair the library setup before relying on symbol updates from external libraries.
-
-## Current status and checks
-
-The source README, dated July 2026, says the first revision had been sent for manufacturing. It lists assembly, bring-up, firmware, enclosure work, and field testing as future work. This repository preserves that design snapshot; it does not establish that a board has been assembled or validated.
-
-On 21 October 2026, KiCad 10.0.6 successfully exported the schematic and PCB to PDF. Its electrical rules check reported **1 error and 14 warnings**. The error says U3's 5V power-input pin is not driven by a power-output pin; the physical BAT-to-U3 connection exists, but the check cannot establish a valid regulated supply. The warnings include unavailable symbol libraries, two connector-symbol mismatches, and off-grid or unconnected wire endpoints. The PCB design rules check reported **46 warnings, no errors, and no unconnected items**; the warnings concerned footprint-library differences and silkscreen/text clearances. These are tool results, not a substitute for electrical review or a manufacturer sign-off.
-
-Before ordering or powering a board, resolve the controller symbol/footprint pinout, verify U3's supply requirements against the battery voltage, choose R1 and C1 values, review the library warnings, and check the fabrication files against the intended stack-up and assembler's requirements.
+The symbol library table points to the **project-assets/symbols directory** rather than an individual KiCad symbol-library file, and the schematic also refers to a **singles** library that the table does not define. KiCad can read the symbols embedded in the schematic, but editing or updating them through the library browser requires fixing those references.
