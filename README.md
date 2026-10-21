@@ -137,9 +137,3 @@ The source README, dated July 2026, says the first revision had been sent for ma
 On 21 October 2026, KiCad 10.0.6 successfully exported the schematic and PCB to PDF. Its electrical rules check reported **1 error and 14 warnings**. The error says U3's 5V power-input pin is not driven by a power-output pin; the physical BAT-to-U3 connection exists, but the check cannot establish a valid regulated supply. The warnings include unavailable symbol libraries, two connector-symbol mismatches, and off-grid or unconnected wire endpoints. The PCB design rules check reported **46 warnings, no errors, and no unconnected items**; the warnings concerned footprint-library differences and silkscreen/text clearances. These are tool results, not a substitute for electrical review or a manufacturer sign-off.
 
 Before ordering or powering a board, resolve the controller symbol/footprint pinout, verify U3's supply requirements against the battery voltage, choose R1 and C1 values, review the library warnings, and check the fabrication files against the intended stack-up and assembler's requirements.
-
-## Origin and reuse
-
-The hardware files were copied from [iammaniron/talkiewalkie](https://github.com/iammaniron/talkiewalkie) at commit [23a049c](https://github.com/iammaniron/talkiewalkie/commit/23a049c176a4f149fa0cb47be465b1cddc30b9c2). The source README calls the design *teleVox — A DIY Walkie Talkie*, credits ManIron, and thanks mentors who reviewed the design.
-
-The source README describes the project as open-source hardware, but that repository does not include a license file. Check with the original author before assuming particular reuse rights.
