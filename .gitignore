@@ -1,0 +1,4 @@
+# KiCad local UI state and backups
+*.kicad_prl
+*-backups/
+_restore_backup_*/
